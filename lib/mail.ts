@@ -18,7 +18,11 @@ ${absaetze.map(a => `<p style="line-height:1.55;margin:0 0 12px">${a}</p>`).join
 ${knopf ? `<p style="margin:24px 0 8px"><a href="${knopf.url}" style="display:inline-block;background:#181a32;color:#fff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:600">${knopf.text}</a></p><p style="font-size:12px;color:#68728f;word-break:break-all">${knopf.url}</p>` : ''}
 </div><p style="font-size:12px;color:#68728f;margin-top:20px">Klarframe Radio · radio.klarframe.com</p></div></body></html>`
 
+/** Interne Konten (Prüf-Mandant, Testkonto) haben kein Postfach — keine Mails, sonst landen Rückläufer bei info@klarframe.com. */
+const INTERN = /@radio\.klarframe\.com$/i
+
 export async function sendeMail(an: string, betreff: string, titel: string, absaetze: string[], knopf?: { text: string; url: string }) {
+  if (INTERN.test(an.trim())) return
   const text = [titel, '', ...absaetze, ...(knopf ? ['', `${knopf.text}: ${knopf.url}`] : [])].join('\n').replace(/<[^>]+>/g, '')
   await t().sendMail({ from: process.env.SMTP_FROM, to: an, subject: betreff, text, html: rahmen(titel, absaetze, knopf) })
 }
