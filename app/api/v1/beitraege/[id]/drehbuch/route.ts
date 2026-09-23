@@ -39,7 +39,7 @@ export const PATCH = mitSitzung<Ctx>('redaktion', async ({ req, s, ctx }) => {
       if (!gleich) geaendert.push(i + 1)
       await tx.zeile.create({ data: {
         beitrag_id: id, nr: i + 1, rolle: z.rolle, text: z.text, regie: z.regie, emotion: z.emotion, luecke_ms: i === 0 ? 0 : z.luecke_ms,
-        block_id: z.block_id ?? vorher?.block_id ?? null, fakt_ids: gleich ? vorher!.fakt_ids : (vorher?.text === z.text ? vorher.fakt_ids : []),
+        block_id: z.block_id ?? vorher?.block_id ?? null, namen: vorher && vorher.text === z.text ? (vorher.namen ?? undefined) : undefined, fakt_ids: gleich ? vorher!.fakt_ids : (vorher?.text === z.text ? vorher.fakt_ids : []),
         befunde: gleich ? (vorher!.befunde ?? undefined) : [...befunde, ...(vorher ? [{ art: 'von_hand', text: 'von_hand', hart: false }] : [{ art: 'neu_von_hand', text: 'neu_von_hand', hart: false }])],
         // Audio bleibt nur, wenn die Zeile unverändert ist — sonst wird sie neu gesprochen.
         ...(gleich ? { audio: vorher!.audio, dauer_s: vorher!.dauer_s, gehoert: vorher!.gehoert, wortgenauigkeit: vorher!.wortgenauigkeit, versuche: vorher!.versuche, warnung: vorher!.warnung } : {}),

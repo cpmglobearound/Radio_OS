@@ -1,5 +1,5 @@
 import type { StimmAnbieter, SprechAuftrag } from './typ'
-import { mitAussprache, sprechAnweisung } from '../anweisung'
+import { sprechAnweisung } from '../anweisung'
 
 // GPT-Live (gpt-live-1) über wss://api.openai.com/v1/live/sessions — die einzige Quelle für Gleam & Co. (07 §2.2).
 // Erprobt am 23.09.2026: Skript als Entwickler-Nachricht in `input` = wortgetreu (7/7), Regie wirkt über die Anweisung.
@@ -18,7 +18,7 @@ function wav(pcm: Buffer) {
 }
 
 function einmal(a: SprechAuftrag): Promise<{ pcm: Buffer; sekunden_abgerechnet: number }> {
-  const text = mitAussprache(a.text, a.aussprache)
+  const text = a.text
   const instructions = [
     'Du bist eine Sprecherin/ein Sprecher, die/der ein Skript vorliest. Du führst kein Gespräch.',
     'Sprich das Skript genau einmal, exakt Wort für Wort, in der vorgegebenen Sprache. Füge nichts hinzu: keine Begrüßung, keine Einleitung, keinen Nachsatz, keine Frage. Lass nichts weg und ändere nichts. Nach dem letzten Wort schweigst du.',

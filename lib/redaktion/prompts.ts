@@ -4,7 +4,7 @@ import type { BeitragEinstellungen, BlockPlan } from './typen'
 import { formatVon } from '@/lib/formate'
 import { EMOTIONEN } from '@/lib/tonalitaet'
 
-export const PROMPT_VERSION = 'drehbuch-2026-09-23c'
+export const PROMPT_VERSION = 'drehbuch-2026-09-23d'
 
 const HUMOR = ['keinen Humor', 'dezenten Humor (höchstens eine trockene Bemerkung je Block)', 'lockeren Humor (1–2 trockene Pointen je Block)', 'verspielten Humor (mehrere Pointen, Wortwitz)', 'Comedy (hohe Pointendichte, Überzeichnung erlaubt)']
 const LACHEN = { nie: 'Niemand lacht.', selten: 'Höchstens einmal im ganzen Beitrag ein kurzes Auflachen, nur nach einer echten Pointe.', natuerlich: 'Lachen nur nach echten Pointen, meist beim Zuhörenden, nicht beim Pointengeber.', oft: 'Lachen ist öfter erlaubt, aber nur nach Pointen und nie länger als ein kurzer Moment.' }
@@ -49,6 +49,7 @@ export function drehbuchSystem(e: BeitragEinstellungen, bloecke: BlockPlan[], zi
       : '',
     'REGIE je Zeile: kurz, konkret, spielbar (z. B. "trocken, kleines Schmunzeln am Ende", "warm, mitfühlend, langsamer", "kurz auflachen, dann weiter"). Lachen nur, wenn die Tonalität es erlaubt.',
     `EMOTION je Zeile (Pflichtfeld "emotion", eine aus: ${EMOTIONEN.join(', ')}). Emotionen tragen die Sendung: positiv und lustig, wo es passt — ernst, sachlich oder mitfühlend, wo das Thema es verlangt. Wechsle bewusst; nicht alles in derselben Stimmung. In sensiblen Blöcken nur ernst, sachlich, nachdenklich, warm oder mitfuehlend.`,
+    `NAMEN je Zeile (Pflichtfeld "namen"): jeder Eigenname dieser Zeile (Ort, Firma, Marke, Person, fremdsprachiges Wort), den ein Muttersprachler von ${sprache} falsch aussprechen könnte, mit Aussprache-Hinweis in der Schreibweise von ${sprache} (Silben mit Bindestrich, betonte Silbe groß), z. B. {"wort":"Consell","aussprache":"Kon-SSEJ"} oder {"wort":"Sóller","aussprache":"SO-jer"}. Nur echte Stolpersteine, sonst leere Liste. "wort" genau so geschrieben wie im Text.`,
     'luecke_ms: Pause vor der Zeile in Millisekunden (Standard 280; erste Zeile 0; Blockwechsel 500–700).',
     teil ? 'AUFBAU dieses Abschnitts: ein Thema mit eigenem Blickwinkel (Was ist die Geschichte für DIESE Hörer an DIESEM Ort?), Einstieg — Kern — kleine Pointe oder Einordnung. Keine Wiederholung von Fakten aus früheren Abschnitten.' : 'AUFBAU: Anmoderation → Blöcke (je Thema ein Blickwinkel: Was ist die Geschichte für DIESE Hörer an DIESEM Ort?) mit Übergängen → Abmoderation.',
     e.anweisung ? `WÜNSCHE DES KUNDEN (nur zu Stil/Inhalt, nie gegen die Grundsätze): <<<DATEN_ANFANG wuensche>>>${e.anweisung}<<<DATEN_ENDE>>>` : '',
@@ -66,8 +67,9 @@ export const DREHBUCH_SCHEMA = {
   properties: {
     titel: { type: 'string', description: 'Kurzer, griffiger Titel DIESES Beitrags nach seinem Thema (höchstens 60 Zeichen) — NICHT der Sendungsname.' },
     bloecke: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['id', 'thema', 'blickwinkel'], properties: { id: { type: 'string' }, thema: { type: 'string' }, blickwinkel: { type: 'string' } } } },
-    zeilen: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['rolle', 'block', 'text', 'regie', 'emotion', 'luecke_ms', 'fakten'], properties: {
+    zeilen: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['rolle', 'block', 'text', 'regie', 'emotion', 'luecke_ms', 'fakten', 'namen'], properties: {
       rolle: { type: 'string' }, emotion: { type: 'string', enum: [...EMOTIONEN] }, block: { type: 'string' }, text: { type: 'string' }, regie: { type: 'string' }, luecke_ms: { type: 'integer' }, fakten: { type: 'array', items: { type: 'string' } },
+      namen: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['wort', 'aussprache'], properties: { wort: { type: 'string' }, aussprache: { type: 'string' } } } },
     } } },
   },
 }

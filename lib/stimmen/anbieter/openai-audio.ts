@@ -1,5 +1,5 @@
 import type { StimmAnbieter } from './typ'
-import { mitAussprache, sprechAnweisung } from '../anweisung'
+import { sprechAnweisung } from '../anweisung'
 
 // gpt-audio-1.5: echtes Lachen/Atmen, folgt Regie — so lief die Demo (Lena = marin, Jan = cedar).
 export const openaiAudio: StimmAnbieter = {
@@ -11,7 +11,7 @@ export const openaiAudio: StimmAnbieter = {
       const r = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST', headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'content-type': 'application/json' },
         body: JSON.stringify({ model: process.env.MODELL_AUDIO || 'gpt-audio-1.5', modalities: ['text', 'audio'], audio: { voice: a.stimme, format: 'wav' },
-          messages: [{ role: 'system', content: sprechAnweisung(a) }, { role: 'user', content: mitAussprache(a.text, a.aussprache) }] }),
+          messages: [{ role: 'system', content: sprechAnweisung(a) }, { role: 'user', content: a.text }] }),
         signal: AbortSignal.timeout(120_000),
       })
       const d = await r.json().catch(() => ({}))

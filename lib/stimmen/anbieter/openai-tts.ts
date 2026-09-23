@@ -1,5 +1,5 @@
 import type { StimmAnbieter } from './typ'
-import { mitAussprache, sprechAnweisung } from '../anweisung'
+import { sprechAnweisung } from '../anweisung'
 
 // gpt-4o-mini-tts: günstig, sehr wortgetreu, Stilanweisungen — lacht nicht echt (Nachrichten, Durchsagen).
 export const openaiTts: StimmAnbieter = {
@@ -8,7 +8,7 @@ export const openaiTts: StimmAnbieter = {
   async sprechen(a) {
     const r = await fetch('https://api.openai.com/v1/audio/speech', {
       method: 'POST', headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ model: 'gpt-4o-mini-tts', voice: a.stimme, input: mitAussprache(a.text, a.aussprache), instructions: sprechAnweisung(a).replace(/Nichtsprachliche Laute[^.]*\./, ''), response_format: 'wav' }),
+      body: JSON.stringify({ model: 'gpt-4o-mini-tts', voice: a.stimme, input: a.text, instructions: sprechAnweisung(a).replace(/Nichtsprachliche Laute[^.]*\./, ''), response_format: 'wav' }),
       signal: AbortSignal.timeout(120_000),
     })
     if (!r.ok) throw new Error(`openai-tts ${r.status}: ${(await r.text()).slice(0, 200)}`)

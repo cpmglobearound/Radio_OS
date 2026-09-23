@@ -10,7 +10,7 @@ import { formatVon } from '@/lib/formate'
 import { ausgabespracheVon } from '@/lib/sprachen'
 import { zeileSprechen } from './zeile'
 import { schneiden } from './schnitt'
-import { hoeren, wortgenauigkeit } from './hoeren'
+import { hoeren, wortgenauigkeit, ziffernAusschreiben } from './hoeren'
 import { lesen, speichern, speicherPfad } from '@/lib/speicher'
 import { abrechnen } from '@/lib/abrechnung/kontobuch'
 import { einreihen } from '@/lib/warteschlange'
@@ -158,7 +158,7 @@ export async function drehbuchSpeichern(id: string, d: Drehbuch, blockDbIds: Rec
     await tx.zeile.deleteMany({ where: { beitrag_id: id } })
     await tx.zeile.createMany({ data: d.zeilen.map((z, i) => ({
       beitrag_id: id, nr: i + 1, block_id: blockDbIds[z.block] ?? null, rolle: z.rolle, text: z.text, regie: z.regie, emotion: z.emotion,
-      luecke_ms: z.luecke_ms, fakt_ids: z.fakten.map(f => `${id}_${f}`), befunde: z.befunde?.length ? z.befunde : undefined,
+      luecke_ms: z.luecke_ms, fakt_ids: z.fakten.map(f => `${id}_${f}`), befunde: z.befunde?.length ? z.befunde : undefined, namen: z.namen?.length ? z.namen : undefined,
     })) })
     for (const bl of d.bloecke) if (blockDbIds[bl.id]) await tx.themenblock.update({ where: { id: blockDbIds[bl.id] }, data: { blickwinkel: bl.blickwinkel } })
   })
@@ -184,7 +184,14 @@ export async function stufeRedaktion(id: string) {
 }
 
 // ─────────────────────────── Stufe 5: Vertonung ───────────────────────────
-function zeilenAuftrag(e: BeitragEinstellungen, zeilen: { nr: number; rolle: string; text: string; regie: string | null; emotion: string | null }[], i: number) {
+type Lexikon = { wort: string; sprichAls: string }[]
+/** Aussprache-Lexikon (07 §4.6): global (mandant_id = null) + Einträge des Mandanten, je Sprache. */
+async function lexikon(mandantId: string, sprache: string): Promise<Lexikon> {
+  const l = await prisma.aussprache.findMany({ where: { sprache, OR: [{ mandant_id: null }, { mandant_id: mandantId }] } })
+  return l.map(x => ({ wort: x.wort, sprichAls: x.sprich_als }))
+}
+
+function zeilenAuftrag(e: BeitragEinstellungen, zeilen: { nr: number; rolle: string; text: string; regie: string | null; emotion: string | null; namen?: unknown }[], i: number, lex: Lexikon = []) {
   const z = zeilen[i]
   const sp = e.sprecher.find(s => s.rolle === z.rolle) ?? e.sprecher[0]
   const tiefe = e.sprecher.length === 3 ? 2 : 1   // 18 §4.7: bei drei Sprechern zwei vorige Zeilen
@@ -194,7 +201,10 @@ function zeilenAuftrag(e: BeitragEinstellungen, zeilen: { nr: number; rolle: str
   return {
     stimm_id: sp.stimme, text: z.text, sprache: e.sprache, name: sp.name, persoenlichkeit: sp.persoenlichkeit, regie: z.regie ?? undefined, emotion: z.emotion ?? undefined,
     sendung: e.sendungsname, kontext, mindest_treue: f?.wortgenauigkeit_min ?? 0.9,
-    pflichtwoerter: namen.filter(n => z.text.includes(n)),
+    // Eigennamen aus dem Drehbuch + Lexikon: Hinweis an die Stimme und Pflichtwort beim Nachhören (falsch ausgesprochener Name = durchgefallen).
+    aussprache: [...((z.namen as { wort: string; aussprache: string }[] | null) ?? []).map(n => ({ wort: n.wort, sprichAls: n.aussprache })), ...lex.filter(l => z.text.includes(l.wort))]
+      .filter((x, k, arr) => arr.findIndex(y => y.wort === x.wort) === k),
+    pflichtwoerter: [...new Set([...namen.filter(n => z.text.includes(n)), ...((z.namen as { wort: string }[] | null) ?? []).map(n => n.wort), ...lex.filter(l => z.text.includes(l.wort)).map(l => l.wort)])],
   }
 }
 const zeilenSchluessel = (mandant: string, id: string, nr: number, a: object) =>
@@ -205,13 +215,14 @@ export async function stufeVertonung(id: string) {
   if (b.status !== 'vertonung') return
   const e = ein(b)
   const zeilen = await prisma.zeile.findMany({ where: { beitrag_id: id }, orderBy: { nr: 'asc' } })
+  const lex = await lexikon(b.mandant_id, e.sprache)
   let fertig = 0, naechste = 0, stimmeUsd = 0
   const parallel = Math.min(Number(process.env.PARALLEL_ZEILEN || 5), zeilen.length)
   await Promise.all(Array.from({ length: parallel }, async () => {
     while (naechste < zeilen.length) {
       const i = naechste++
       const z = zeilen[i]
-      const auftrag = zeilenAuftrag(e, zeilen, i)
+      const auftrag = zeilenAuftrag(e, zeilen, i, lex)
       // Idempotent: nur Zeilen ohne Audio sprechen. Änderungen am Drehbuch setzen das Audio der Zeile zurück.
       if (!z.audio) {
         const key = zeilenSchluessel(b.mandant_id, id, z.nr, { ...auftrag, v: b.version })
@@ -255,7 +266,10 @@ export async function stufeSchnitt(id: string) {
     const { ff } = await import('./audio')
     await ff(['-loglevel', 'error', '-i', speicherPfad(mp3), '-ac', '1', '-ar', '16000', '-b:a', '32k', pruef])
     const h = await hoeren(pruef, e.sprache, e.sprecher.map(x => x.name))
-    gesamtTreue = wortgenauigkeit(zeilen.map(z => z.text).join(' '), h.ohne_geraeusche)
+    const soll = zeilen.map(z => z.text).join(' ')
+    // Auch hier schreibt die Erkennung Zahlen als Ziffern → vor dem Vergleich ausschreiben (sonst falscher Hinweis).
+    const gehoert = /\d/.test(h.ohne_geraeusche) ? (await ziffernAusschreiben(h.ohne_geraeusche, e.sprache, soll)).text : h.ohne_geraeusche
+    gesamtTreue = wortgenauigkeit(soll, gehoert)
     if (gesamtTreue < 0.85) hinweise.push(`gesamt:${Math.round(gesamtTreue * 100)}`)
     await import('node:fs/promises').then(fs => fs.rm(pruef, { force: true }))
   }

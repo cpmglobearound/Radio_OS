@@ -13,7 +13,7 @@ export interface Hoerbeispiel {
 // Stand 23.09.2026: echte Produktionen der Plattform — Morgenshow „fröhlich mit Humor", zwei Stimmen, Mallorca-Nachrichten.
 // Archiv aller Hörbeispiele: /var/lib/klarframe-radio/hoerbeispiele/
 export const HOERBEISPIELE: Hoerbeispiel[] = [
-  { id: 'mallorca-de', sprache: 'de', datei: 'mallorca-de.mp3', titel: 'Inselfunk am Morgen — Mallorcas Herbst zwischen Markt und Meer', sprecher: ['Lena', 'Jan'], laenge_s: 132, format: 'zwiegespraech' },
+  { id: 'mallorca-de', sprache: 'de', datei: 'mallorca-de.mp3', titel: 'Inselfunk am Morgen — Mallorcas Herbst zwischen Markt und Meer', sprecher: ['Lena', 'Jan'], laenge_s: 127, format: 'zwiegespraech' },
   { id: 'mallorca-es', sprache: 'es', datei: 'mallorca-es.mp3', titel: 'Radio Isla — Otoño fuera, cifras dentro', sprecher: ['Lucía', 'Pablo'], laenge_s: 123, format: 'zwiegespraech' },
   { id: 'mallorca-en', sprache: 'en', datei: 'mallorca-en.mp3', titel: 'Island Radio — Mallorca in Autumn: Sun, Sweets and Rent', sprecher: ['Emma', 'Oliver'], laenge_s: 108, format: 'zwiegespraech' },
 ]

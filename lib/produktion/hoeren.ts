@@ -88,8 +88,9 @@ export function wortgenauigkeit(soll: string, ist: string) {
 
 /** Pflichtwörter (Eigennamen, Zahlwörter) müssen gehört werden — sonst durchgefallen, egal wie hoch der Wert (08 §1.5). */
 export function fehlendePflichtwoerter(soll: string, ist: string, pflicht: string[]) {
-  const gehoert = new Set(woerter(ist))
-  return pflicht.filter(p => woerter(p).some(w => !gehoert.has(w)) && woerter(soll).some(w => woerter(p).includes(w)))
+  const gehoert = woerter(ist), sollW = woerter(soll)
+  const da = (w: string) => gehoert.some(g => gleichesWort(w, g)) || gehoert.join('').includes(w)   // „mallorca.com" = „mallorca com"
+  return pflicht.filter(p => woerter(p).length && woerter(p).every(w => sollW.includes(w)) && woerter(p).some(w => !da(w)))
 }
 
 /**

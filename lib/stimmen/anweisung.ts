@@ -14,12 +14,6 @@ export function sprechAnweisung(a: SprechAuftrag) {
     + `Nichtsprachliche Laute wie Lachen, Atmen, Schmunzeln, Seufzen sind erlaubt, wenn die Regie es verlangt. Natürlich, menschlich, wie ein echtes Gespräch unter Kollegen, keine Vorlese-Stimme. `
     + kontext
     + (emo ? `Emotion: ${emo}. ` : '')
+    + (a.aussprache?.length ? `Aussprache von Namen (den Namen so aussprechen, NICHT die Umschrift vorlesen): ${a.aussprache.map(x => `${x.wort} wie „${x.sprichAls}"`).join('; ')}. ` : '')
     + `Regie für diese Zeile: ${a.regie || 'natürlich'}${streng}`
-}
-
-/** Aussprache-Lexikon nur für die Vertonung (Drehbuch bleibt korrekt geschrieben, 07 §4.6). */
-export function mitAussprache(text: string, lex?: { wort: string; sprichAls: string }[]) {
-  let t = text
-  for (const l of lex ?? []) t = t.replace(new RegExp(`\\b${l.wort.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g'), l.sprichAls)
-  return t
 }

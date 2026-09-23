@@ -207,6 +207,7 @@ model Zeile {
   text            String
   regie           String?
   emotion         String? // eine aus lib/tonalitaet.ts EMOTIONEN
+  namen           Json? // Eigennamen mit Aussprache-Hinweis [{ wort, aussprache }] — Hinweis an die Stimme + Pflichtwort beim Nachhören
   befunde         Json? // Prüfbefunde dieser Zeile [{ art, text, hart }]
   kosten_usd      Float   @default(0) // nur Admin
   luecke_ms       Int      @default(280) // Pause davor; negativ = Überlappung

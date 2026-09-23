@@ -26,5 +26,5 @@ export interface BeitragEinstellungen {
 export interface FaktKurz { id: string; aussage: string; zahl: string | null; quelle: string; datum: string | null }
 export interface BlockPlan { id: string; thema: string; sensibel: boolean; fakten: FaktKurz[] }
 
-export interface DrehbuchZeile { rolle: string; block: string; text: string; regie: string; emotion: Emotion; luecke_ms: number; fakten: string[]; befunde?: { art: string; text: string; hart: boolean }[] }
+export interface DrehbuchZeile { rolle: string; block: string; text: string; regie: string; emotion: Emotion; luecke_ms: number; fakten: string[]; namen?: { wort: string; aussprache: string }[]; befunde?: { art: string; text: string; hart: boolean }[] }
 export interface Drehbuch { titel: string; bloecke: { id: string; thema: string; blickwinkel: string }[]; zeilen: DrehbuchZeile[] }
