@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* Klarframe-Stil nach voice.klarframe.com — helle Fassung als Standard (Wunsch Oliver 23.09.2026). */
+@theme {
+  --color-grund: #f5f8fc;
+  --color-grund-2: #edf2f8;
+  --color-karte: #ffffff;
+  --color-karte-2: #eaf1f8;
+  --color-linie: #dce4ef;
+  --color-linie-2: #cbd0dc;
+  --color-text: #181a32;
+  --color-text-2: #252d4a;
+  --color-leise: #68728f;
+  --color-cyan: #00c8ff;
+  --color-cyan-tief: #008fb8;
+  --color-cyan-hell: #dff7ff;
+  --color-cyan-text: #006f91;
+  --color-violett: #8b5cf6;
+  --color-rosa: #ec4899;
+  --color-indigo: #181a32;
+  --color-gruen: #0d9f88;
+  --color-gruen-hell: #f0fdfa;
+  --color-gelb: #d97706;
+  --color-gelb-hell: #fffbeb;
+  --color-rot: #e03e3e;
+  --color-rot-hell: #fdf2f2;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-barlow), system-ui, sans-serif;
+  --radius-kf: 1.25rem;
+}
+
+@layer base {
+  html { background: var(--color-grund); color: var(--color-text); color-scheme: light; }
+  body { font-family: var(--font-sans); min-height: 100dvh; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.03em; }
+  :focus-visible { outline: 2px solid var(--color-cyan-tief); outline-offset: 2px; }
+}
+
+@layer components {
+  .verlauf-text { background: linear-gradient(90deg, #008fb8, #8b5cf6 55%, #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .verlauf-grund { background: linear-gradient(90deg, #00c8ff, #8b5cf6 55%, #ec4899); }
+  .karte { background: var(--color-karte); border: 1px solid var(--color-linie); border-radius: var(--radius-kf); box-shadow: 0 1px 2px rgb(24 26 50 / .04), 0 8px 24px -12px rgb(24 26 50 / .08); }
+  .knopf { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: 999px; padding: .7rem 1.25rem; font-weight: 600; transition: transform .15s, opacity .15s, background .15s, box-shadow .15s; }
+  .knopf:disabled { opacity: .5; cursor: not-allowed; }
+  .knopf-haupt { background: #181a32; color: #fff; }
+  .knopf-haupt:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgb(0 143 184 / .6); }
+  .knopf-bunt { background: linear-gradient(90deg, #00c8ff, #8b5cf6); color: #fff; }
+  .knopf-bunt:hover:not(:disabled) { transform: translateY(-1px); }
+  .knopf-zweit { background: #fff; border: 1px solid var(--color-linie-2); color: var(--color-text); }
+  .knopf-zweit:hover:not(:disabled) { background: var(--color-grund-2); }
+  .feld { width: 100%; background: #fff; border: 1px solid var(--color-linie-2); border-radius: 12px; padding: .7rem .9rem; color: var(--color-text); }
+  .feld:focus { outline: none; border-color: var(--color-cyan-tief); box-shadow: 0 0 0 3px var(--color-cyan-hell); }
+  .etikett { display: block; font-size: .875rem; font-weight: 500; color: var(--color-text-2); margin-bottom: .35rem; }
+  .hinweis { font-size: .875rem; color: var(--color-leise); }
+}

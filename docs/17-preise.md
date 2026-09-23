@@ -115,3 +115,45 @@ Im Abo ist der Nachkauf nie teurer als der Einzelbeitrag gleicher Länge.
 - Prüfskript `scripts/preise-pruefen.ts`: jede Stufengrenze (4:59, 5:00,
   5:01, 60:00, 61:00, 120:00), Premium-Faktor, Sprachfassungs-Rabatt,
   Sonderpreis 0 €, bestellter Preis als Obergrenze.
+
+## 8. Kalkulation vom 23.09.2026 (gilt — ersetzt die Vorschläge in §2–§4)
+
+Entscheidung Oliver: **mindestens 75 % Marge** im teuersten Fall, nach Kartengebühr.
+Grundlage sind die offiziellen Preise (developers.openai.com/api/docs/pricing, platform.kimi.ai, Stand 23.09.2026)
+und Messwerte aus 15 echten Produktionen (1,21 Sprechversuche je Zeile, 9,5 Zeilen je Sprechminute).
+
+| Posten je fertiger Minute | USD |
+|---|---|
+| Stimme GPT-Audio (`gpt-audio-1.5`, 64 $/1 Mio. Audio-Tokens, 1.200 Tokens/min, inkl. Wiederholungen und Rohschnitt) | 0,128 |
+| Stimme GPT-Live (`gpt-live-1`, 0,05 $/min Sitzungszeit, inkl. Anlauf und Wiederholungen) | 0,085 |
+| Stimme Sprachausgabe (`gpt-4o-mini-tts`) | 0,020 |
+| Nachhören (`gpt-4o-transcribe`, 0,006 $/min je Versuch + Endabnahme) | 0,013 |
+| Drehbuch + Prüfung (`gpt-5.4` / `gpt-5.4-mini`) | ~0,06 |
+| Recherche je Thema (OpenAI-Websuche 10 $/1.000 + Tokens, Kimi, Faktenauszug) | ~0,10 je Thema |
+| Server, Speicher | 0,01 |
+
+Worst Case (GPT-Audio + KI-Recherche + 15 % Überlänge + 15 % Zuschlag für Fehlschläge/Probeminuten, 1 $ = 0,95 €):
+**≈ 0,26 € je Minute** bei langen Beiträgen; kurze Beiträge tragen zusätzlich feste Kosten (Themen, Drehbuch).
+Mindestpreis = (Kosten + 0,25 € Kartengebühr) ÷ (1 − 0,75 − 0,015).
+
+| Einzelbeitrag | Preis | Kosten (Worst Case) | Marge |
+|---|---|---|---|
+| bis 5 min | 8,90 € | 1,82 € | 75,2 % |
+| bis 10 min | 14,90 € | 3,15 € | 75,7 % |
+| bis 15 min | 21,90 € | 4,70 € | 75,9 % |
+| bis 20 min | 27,90 € | 6,14 € | 75,6 % |
+| bis 30 min | 39,90 € | 9,13 € | 75,0 % |
+| bis 45 min | 58,90 € | 13,55 € | 75,1 % |
+| bis 60 min | 78,90 € | 18,09 € | 75,3 % |
+| je weitere Minute | 1,29 € | 0,26 € | ≥ 75 % |
+
+| Abo | Minuten | Preis/Monat | je Minute | Marge |
+|---|---|---|---|---|
+| Start | 60 | 69 € | 1,15 € | 76,0 % |
+| Pro | 240 | 269 € | 1,12 € | 75,4 % |
+| Sender | 900 | 999 € | 1,11 € | 75,2 % |
+| Sender XL | 2.400 | 2.690 € | 1,12 € | 75,5 % |
+
+Nachkauf: 30 min 35 € · 120 min 139 € · 500 min 559 € (je ≥ 75 %).
+Gesetzt mit `scripts/preise-setzen.ts`; alle Anzeigen (Startseite, /preise, llms.txt, Kostenvoranschlag) lesen den Katalog.
+Die tatsächlichen Kosten jeder Produktion stehen in `Beitrag.kosten` (Admin) und werden mit diesen Annahmen verglichen.

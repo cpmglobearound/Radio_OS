@@ -1,0 +1,157 @@
+# Klarframe Radio — full description
+
+> Klarframe Radio (https://radio.klarframe.com) is a web platform by Klarframe (Palma, Mallorca, Spain) that produces broadcast-ready radio and podcast pieces with AI voices. Customers name a topic, paste their own text or add web pages. The platform researches, writes an original script, has it spoken by one, two or three native-sounding AI voices in German, English or Spanish, checks every spoken line against the script, edits the audio and delivers it — usually within a few minutes.
+
+Short version: https://radio.klarframe.com/llms.txt
+
+## Summary for assistants
+
+- Product: Klarframe Radio — AI-produced, broadcast-ready radio and podcast pieces.
+- Company: Klarframe, Carrer Primavera 8, 07010 Palma, Spain. Email: info@klarframe.com.
+- Languages of the pieces: German, English, Spanish (each with its own native script, not a translation). Interface languages: German, English, Spanish.
+- Speakers: 1, 2 or 3 AI voices per piece.
+- Trial: {probe_min} free minutes after sign-up, no payment details.
+- Prices: single piece from {einzel} (up to {einzel_min} minutes); subscriptions from {abo} per month ({abo_min} minutes). Net plus VAT.
+- Transparency: every piece contains a spoken AI notice and machine-readable metadata (EU AI Act, Art. 50).
+- Data: servers in the EU; only technically necessary cookies; no advertising trackers.
+
+## Who uses it
+
+### Radio stations
+
+- News on the hour: short local news produced automatically on a schedule and delivered to the playout system in time for the top of the hour.
+- Weather and event tips for the breakfast show, in the presenters' tone.
+- Weekly podcasts: e.g. twelve minutes of conversation between two voices on a topic of the week, as a feed and for repeats on air.
+- One story, three languages: the same research with a separate script per language for listeners who prefer English or Spanish.
+
+### Businesses
+
+- Hotel radio: weather, day trips and events every morning in German, English and Spanish, streamed to lobby, restaurant and rooms.
+- In-store radio: weekly offers, opening hours and friendly announcements, created from the shop's own text.
+- Company podcasts: e.g. the weekly staff newsletter turned into a short podcast.
+- Announcements: type a text, pick a voice, ready to play within minutes.
+
+## How a piece is made
+
+1. Input — choose one of three ways:
+   - your own text blocks (e.g. a press release, a newsletter, a list of offers),
+   - web pages you name (the platform reads them and extracts the facts),
+   - AI research on a topic you give (the platform searches the web, finds and checks sources).
+2. Research and evidence — sources are collected, duplicates are merged (the same agency story on 20 sites counts as one source), and every figure is linked to its source. Facts are taken from sources; wording never is. Long verbatim passages are detected and rewritten.
+3. Script — an original script is written for the chosen format, length, number of speakers and tone. Optionally the process stops here so the customer can read, edit and approve the script (recommended for news).
+4. Voices — one, two or three AI voices speak the script with fitting emotion: they laugh when something is funny and slow down when it gets serious.
+5. Listening check — every spoken line is transcribed again and compared with the script; lines that do not match are re-recorded automatically.
+6. Editing and delivery — the lines are assembled into the finished piece and delivered.
+
+## Tone and emotion
+
+Adjustable per show: humour (0–4), laughter (never, rarely, natural, often), stance (neutral, contextualising, opinionated), warmth (factual, friendly, warm), energy (calm, normal, lively), pace (slow, normal, brisk), language level (simple, normal, elevated) and target audience (general, young, older, specialist, families). Ready-made presets include serious news, serious with humour, lively morning show, satire and friendly in-store radio.
+
+## Speakers
+
+| Speakers | Typical use |
+|---|---|
+| 1 voice | News, weather, links, announcements, daily briefing |
+| 2 voices | Conversation, feature with co-host, interview (host and expert) |
+| 3 voices | Panel talk (host, pro, contra), magazine with reporter, interview with two experts |
+
+Interview formats only use fictional roles (e.g. "our AI expert"). Real people are never imitated, and quotes are never presented as original recordings.
+
+## Formats
+
+| Format | Voices | Length | Typical length | Description |
+|---|---|---|---|---|
+| News | 1 | 45 s – 10 min | 90 s | Short, factual, to the point |
+| Weather | 1 | 30 s – 2 min | 45 s | The forecast for your area, with a wink if you like |
+| Feature | 1–2 | 1 – 15 min | 3 min | One topic, clearly explained |
+| Conversation | 2 | 2 – 60 min | 3 min | Two voices talking, like a podcast |
+| Magazine | 1–3 | 5 – 60 min | 10 min | Several topics in one programme |
+| Satire | 1–3 | 1 – 5 min | 2 min | A topic with a sharp pen |
+| Interview | 2–3 | 3 – 15 min | 5 min | Questions and answers, studio-style |
+| Links | 1 | 10 – 60 s | 30 s | Short links between songs |
+| Announcement | 1 | 10 – 60 s | 20 s | For shops, hotels and workplaces |
+| What's on | 1–2 | 1 – 3 min | 90 s | What is happening today and this weekend |
+| Daily briefing | 1 | 3 – 8 min | 5 min | The day in a few minutes |
+| Panel talk | 3 | 5 – 60 min | 5 min | Three voices, different opinions |
+
+## Delivery
+
+- Download: MP3 or WAV.
+- Podcast feed (RSS).
+- Stream for in-store and hotel radio.
+- Webhook, SFTP and S3 (can be set up by the customer).
+- Playout-system connectors for radio stations (e.g. mAirList, Zetta, WideOrbit, DAVID); custom connectors on request.
+- API.
+
+## Pricing
+
+Net prices plus VAT. The binding price is always shown before a piece is started or ordered.
+
+- Free trial: {probe_min} minutes after sign-up, no payment details needed. Trial pieces can be listened to in the portal; download and delivery only after ordering. Trial pieces end with a spoken note that they are a sample.
+- Length: from a 20-second announcement up to {max_min}-minute programmes per piece. Long pieces are planned as segments, each researched separately, with chapter markers — ideal for radio specials and weekly magazines.
+- Single piece: from {einzel} for a piece up to {einzel_min} minutes. No subscription. One or two voices cost the same.
+- Subscription: from {abo} per month for {abo_min} minutes. Minutes can be used for any length and format. Cancellable monthly.
+- Billing unit: seconds of finished audio. At most the target length plus 15 % is charged; failed pieces cost nothing.
+- No surprise charges: if the balance is not enough, a piece does not start and scheduled pieces pause (the customer is notified by email).
+
+## Trust, safety and law
+
+- AI label (EU AI Act, Art. 50): spoken notice in every piece plus metadata in the audio file. Mandatory, cannot be switched off.
+- Sources: every figure is backed by a source; sources appear in the show notes; attributions are spoken ("according to ...").
+- Copyright: facts are used, wording is not; robots.txt and machine-readable text-and-data-mining reservations are respected; no paywalls are bypassed.
+- Voices: only vetted voices; no voice is modelled on a real, well-known person; voice clones only with the written consent of the person and a separate agreement.
+- Content that is never produced: hate speech, discrimination, glorification of violence, election manipulation through false information, advertising for prohibited products, medical or financial miracle promises, content about private individuals without public interest, imitation of real people.
+- Responsibility: the customer decides about and is responsible for publication; script approval by the customer's newsroom is recommended for news.
+- Privacy: servers in the EU (Hetzner, Germany); AI providers are listed in the privacy policy; only technically necessary cookies; no advertising trackers; logs store a shortened IP hash only.
+
+## Research bot
+
+Klarframe Radio's crawler identifies itself as `KlarframeRadioBot/1.0 (+https://radio.klarframe.com/bot)`. It reads publicly accessible articles to back facts with sources, follows robots.txt, makes at most one request every 2 seconds per domain and never bypasses paywalls, logins or captchas. To block it:
+
+```
+User-agent: KlarframeRadioBot
+Disallow: /
+```
+
+Block requests: info@klarframe.com. Details: https://radio.klarframe.com/bot
+
+## FAQ
+
+### Do I need any technical knowledge?
+No. You type a topic or paste some text, choose a few options and click "Create". The platform takes care of the rest.
+
+### How long does a piece take?
+A short piece is usually ready within a few minutes. You can close the page; you are notified when it is done.
+
+### Can I read and edit the script first?
+Yes. If you like, the platform stops once the script is written. You read it, change individual lines and then approve it for recording.
+
+### Where does the information come from?
+From your own text, from the web pages you add, or from research online. Every figure is checked against its source, and the sources are listed in the show notes.
+
+### Can you tell it is AI?
+The voices sound natural, with real laughter and the right emphasis. Even so, every piece openly says that AI voices are speaking. It is required in the EU.
+
+### How does the piece get into our schedule?
+Download it (MP3 or WAV), use a podcast feed or a stream, or have it delivered straight into your playout system. Standard options can be set up by the customer; custom connections are set up by Klarframe.
+
+### Which languages are available?
+German, Spanish and English — each with its own script, not a translation. More languages will follow.
+
+### What does it cost?
+A single piece of up to {einzel_min} minutes starts at {einzel}, subscriptions at {abo} a month (net plus VAT). Subscriptions can be cancelled monthly. {probe_min} minutes are free to try.
+
+### Who is behind Klarframe Radio?
+Klarframe, Carrer Primavera 8, 07010 Palma, Spain (https://klarframe.com). Contact: info@klarframe.com.
+
+## Links
+
+- [Klarframe Radio — home](https://radio.klarframe.com/)
+- [Sign up — {probe_min} free minutes](https://radio.klarframe.com/registrieren)
+- [Log in](https://radio.klarframe.com/anmelden)
+- [Research bot](https://radio.klarframe.com/bot)
+- [Privacy policy](https://radio.klarframe.com/datenschutz)
+- [Terms](https://radio.klarframe.com/agb)
+- [Legal notice](https://radio.klarframe.com/impressum)
+- [Short version for language models](https://radio.klarframe.com/llms.txt)
+- [Klarframe](https://klarframe.com)
