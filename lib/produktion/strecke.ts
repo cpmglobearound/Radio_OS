@@ -84,11 +84,11 @@ async function themaRecherchieren(id: string, mandantId: string, e: BeitragEinst
       const ort = [e.region?.orte?.join(', '), e.region?.land].filter(Boolean).join(', ')
       const zeit = e.aktualitaet_h && e.aktualitaet_h <= 168 ? ` (Veröffentlichung in den letzten ${Math.round(e.aktualitaet_h / 24) || 1} Tagen)` : ''
       const anfrage = `${th.titel}${ort ? ` — Bezug: ${ort}` : ''}${zeit}`
-      // Beide Suchen parallel; ist OpenAI fertig, bekommt Kimi höchstens noch 25 s (Kimi ist Ergänzung, nicht Bremse).
+      // Beide Suchen parallel (OpenAI wählt gezielt Artikel, Kimi liefert schnell weitere Treffer); nach OpenAI höchstens noch 25 s warten.
       // Fehler sofort abfangen: ein unbeantworteter Fehlschlag darf den Arbeiter nie beenden.
-      const kimi = kimiSuche(anfrage, 6).catch(err => { console.error('kimi', String(err).slice(0, 200)); return { daten: [], kosten_usd: 0 } })
+      const kimi = kimiSuche(th.titel + (ort ? ` ${ort}` : ''), 6, { sprache: e.sprache, aktualitaet_h: e.aktualitaet_h }).catch(err => { console.error('kimi', String(err).slice(0, 200)); return { daten: [], kosten_usd: 0 } })
       const [o] = await Promise.allSettled([openaiSuche(anfrage, 8)])
-      const [k] = await Promise.allSettled([Promise.race([kimi, new Promise<never>((_, rej) => setTimeout(() => rej(new Error('kimi_zeit')), o.status === 'fulfilled' && o.value.daten.length ? 25_000 : 150_000))])])
+      const [k] = await Promise.allSettled([Promise.race([kimi, new Promise<never>((_, rej) => setTimeout(() => rej(new Error('kimi_zeit')), o.status === 'fulfilled' && o.value.daten.length ? 25_000 : 60_000))])])
       const gefunden = [...(o.status === 'fulfilled' ? o.value.daten : []), ...(k.status === 'fulfilled' ? k.value.daten : [])]
       kosten.recherche_usd! += (o.status === 'fulfilled' ? o.value.kosten_usd : 0) + (k.status === 'fulfilled' ? k.value.kosten_usd : 0)
       urls = [...new Set([...urls, ...gefunden.map(g => g.url)])].slice(0, 10)

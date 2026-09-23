@@ -62,28 +62,31 @@ export async function openaiSuche(anfrage: string, anzahl: number): Promise<KiEr
   return { daten: artikel.filter(x => /^https?:\/\//.test(x.url)), kosten_usd: kosten(MODELLE.suche, d.usage) + 0.01 }   // + 10 $ je 1.000 Suchaufrufe
 }
 
-/** Zweite Suchquelle: Kimi mit eingebauter Websuche. Modell einstellbar (kimi-k3 meldete am 23.09.2026 „tokenization failed"). */
-export async function kimiSuche(anfrage: string, anzahl: number): Promise<KiErgebnis<{ titel: string; url: string; datum: string }[]>> {
+// Keine Nachrichtenquellen: soziale Netzwerke, Video, Anzeigen- und Buchungsportale.
+const KEINE_NACHRICHTEN = /(^|\.)(facebook|instagram|threads|x|twitter|tiktok|youtube|linkedin|pinterest|reddit|idealista|fotocasa|spotahome|airbnb|booking|tripadvisor|expedia|milanuncios|wallapop)\.[a-z.]+$/i
+const NACHRICHTEN_WORT: Record<string, string> = { de: 'Nachrichten', es: 'noticias', en: 'news', ca: 'notícies', fr: 'actualités', it: 'notizie' }
+
+/**
+ * Zweite Suchquelle: Kimi „Web Search Pro" (POST /v1/tools/search_pro, 0,003 $ je Treffer-Suche; Nachfolger des
+ * eingebauten $web_search, das am 20.10.2026 abgeschaltet wird). Direkte Suche ohne Sprachmodell → wenige Sekunden.
+ */
+export async function kimiSuche(anfrage: string, anzahl: number, opt: { sprache?: string; aktualitaet_h?: number } = {}): Promise<KiErgebnis<{ titel: string; url: string; datum: string }[]>> {
   const key = process.env.KIMI_API_KEY
   if (!key) return { daten: [], kosten_usd: 0 }
-  const modell = process.env.KIMI_SUCHMODELL || 'kimi-k2.6'
-  const messages: object[] = [{ role: 'user', content: `Suche im Web nach bis zu ${anzahl} aktuellen, frei zugänglichen Artikeln zu: ${anfrage}\nAntworte NUR mit JSON: {"artikel":[{"titel":"…","url":"https://…","datum":"JJJJ-MM-TT oder leer"}]}` }]
-  for (let runde = 0; runde < 5; runde++) {
-    const r = await fetch('https://api.moonshot.ai/v1/chat/completions', {
-      method: 'POST', headers: { Authorization: `Bearer ${key}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ model: modell, messages, tools: [{ type: 'builtin_function', function: { name: '$web_search' } }], ...(modell === 'kimi-k3' ? { reasoning_effort: 'low' } : {}) }),
-      signal: AbortSignal.timeout(180_000),
-    })
-    const d = await r.json()
-    if (!r.ok) throw new Error(`Kimi ${r.status}: ${JSON.stringify(d).slice(0, 200)}`)
-    const c = d.choices[0]
-    messages.push(c.message)
-    if (c.finish_reason === 'tool_calls') {
-      for (const tc of c.message.tool_calls) messages.push({ role: 'tool', tool_call_id: tc.id, name: tc.function.name, content: tc.function.arguments })
-      continue
-    }
-    const m = String(c.message.content || '').match(/\{[\s\S]*\}/)
-    try { return { daten: (JSON.parse(m?.[0] ?? '{}').artikel ?? []).filter((x: { url: string }) => /^https?:\/\//.test(x.url)), kosten_usd: 0.02 } } catch { return { daten: [], kosten_usd: 0.02 } }
-  }
-  return { daten: [], kosten_usd: 0.02 }
+  const basis = (opt.sprache ?? 'de').slice(0, 2)
+  const bis = new Date(), von = new Date(Date.now() - (opt.aktualitaet_h ?? 24 * 30) * 3600_000)
+  const monat = (d: Date) => d.toISOString().slice(0, 7)
+  const r = await fetch('https://api.moonshot.ai/v1/tools/search_pro', {
+    method: 'POST', headers: { Authorization: `Bearer ${key}`, 'content-type': 'application/json' },
+    body: JSON.stringify({ text_query: `${anfrage} ${NACHRICHTEN_WORT[basis] ?? 'news'}`.slice(0, 300), limit: Math.min(20, anzahl * 2), time_window: { start: monat(von), end: monat(bis) } }),
+    signal: AbortSignal.timeout(45_000),
+  })
+  const d = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(`Kimi-Suche ${r.status}: ${JSON.stringify(d).slice(0, 200)}`)
+  const treffer = ((d.search_results ?? []) as { title: string; url: string; date: string }[])
+    .filter(x => /^https?:\/\//.test(x.url))
+    .filter(x => { try { return !KEINE_NACHRICHTEN.test(new URL(x.url).hostname.replace(/^www\./, '')) } catch { return false } })
+    .slice(0, anzahl)
+    .map(x => ({ titel: x.title, url: x.url, datum: x.date }))
+  return { daten: treffer, kosten_usd: treffer.length ? 0.003 : 0 }
 }
