@@ -188,7 +188,8 @@ type Lexikon = { wort: string; sprichAls: string }[]
 /** Aussprache-Lexikon (07 §4.6): global (mandant_id = null) + Einträge des Mandanten, je Sprache. */
 async function lexikon(mandantId: string, sprache: string): Promise<Lexikon> {
   const l = await prisma.aussprache.findMany({ where: { sprache, OR: [{ mandant_id: null }, { mandant_id: mandantId }] } })
-  return l.map(x => ({ wort: x.wort, sprichAls: x.sprich_als }))
+  // Vorrang: eigener Eintrag des Kunden vor globalem Klarframe-Eintrag.
+  return l.sort((a, b) => (a.mandant_id ? 0 : 1) - (b.mandant_id ? 0 : 1)).map(x => ({ wort: x.wort, sprichAls: x.sprich_als }))
 }
 
 function zeilenAuftrag(e: BeitragEinstellungen, zeilen: { nr: number; rolle: string; text: string; regie: string | null; emotion: string | null; namen?: unknown }[], i: number, lex: Lexikon = []) {
@@ -202,7 +203,8 @@ function zeilenAuftrag(e: BeitragEinstellungen, zeilen: { nr: number; rolle: str
     stimm_id: sp.stimme, text: z.text, sprache: e.sprache, name: sp.name, persoenlichkeit: sp.persoenlichkeit, regie: z.regie ?? undefined, emotion: z.emotion ?? undefined,
     sendung: e.sendungsname, kontext, mindest_treue: f?.wortgenauigkeit_min ?? 0.9,
     // Eigennamen aus dem Drehbuch + Lexikon: Hinweis an die Stimme und Pflichtwort beim Nachhören (falsch ausgesprochener Name = durchgefallen).
-    aussprache: [...((z.namen as { wort: string; aussprache: string }[] | null) ?? []).map(n => ({ wort: n.wort, sprichAls: n.aussprache })), ...lex.filter(l => z.text.includes(l.wort))]
+    // Vorrang: von Menschen gepflegtes Lexikon vor dem Vorschlag des Drehbuchmodells (erster Eintrag je Wort gewinnt).
+    aussprache: [...lex.filter(l => z.text.includes(l.wort)), ...((z.namen as { wort: string; aussprache: string }[] | null) ?? []).map(n => ({ wort: n.wort, sprichAls: n.aussprache }))]
       .filter((x, k, arr) => arr.findIndex(y => y.wort === x.wort) === k),
     pflichtwoerter: [...new Set([...namen.filter(n => z.text.includes(n)), ...((z.namen as { wort: string }[] | null) ?? []).map(n => n.wort), ...lex.filter(l => z.text.includes(l.wort)).map(l => l.wort)])],
   }
@@ -229,7 +231,12 @@ export async function stufeVertonung(id: string) {
         const r = await zeileSprechen(auftrag)
         await speichern(key, r.wav)
         stimmeUsd += r.kosten_usd
-        await prisma.zeile.update({ where: { id: z.id }, data: { audio: key, dauer_s: r.sek, gehoert: r.gehoert, wortgenauigkeit: r.treue, versuche: r.versuche, warnung: r.warnung, kosten_usd: r.kosten_usd } })
+        // Rettungsrunde hat ein Wort ersetzt oder Aussprache-Hinweise ergänzt → an der Zeile festhalten (sichtbar für die Redaktion).
+        const extra = {
+          ...(r.text_neu ? { text: r.text_neu, befunde: [...((z.befunde as object[] | null) ?? []), { art: 'umformuliert', text: 'umformuliert', hart: false }] } : {}),
+          ...(r.aussprache_neu ? { namen: r.aussprache_neu.map(x => ({ wort: x.wort, aussprache: x.sprichAls })) } : {}),
+        }
+        await prisma.zeile.update({ where: { id: z.id }, data: { audio: key, dauer_s: r.sek, gehoert: r.gehoert, wortgenauigkeit: r.treue, versuche: r.versuche, warnung: r.warnung, kosten_usd: r.kosten_usd, ...extra } })
       }
       fertig++
       await fortschritt(id, 'vertonung', 55 + Math.round((fertig / zeilen.length) * 35), `zeile_${fertig}_von_${zeilen.length}`)

@@ -4,13 +4,13 @@
 export type ProbeErgebnis = { ok: true; blob: Blob } | { ok: false; code: string }
 
 /** POST /api/v1/stimmen/{id}/probe → Blob. Abbruch (signal) wirft AbortError weiter. */
-export async function probeHolen(id: string, text: string, sprache: string, signal: AbortSignal): Promise<ProbeErgebnis> {
+export async function probeHolen(id: string, text: string, sprache: string, signal: AbortSignal, regie?: string): Promise<ProbeErgebnis> {
   let res: Response
   try {
     res = await fetch(`/api/v1/stimmen/${encodeURIComponent(id)}/probe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, sprache }),
+      body: JSON.stringify({ text, sprache, ...(regie ? { regie: regie.slice(0, 200) } : {}) }),
       signal,
       cache: 'no-store',
     })

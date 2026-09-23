@@ -10,7 +10,7 @@ import SprachUmschalter from '@/components/gemeinsam/SprachUmschalter'
 import Hinweis from '@/components/gemeinsam/Hinweis'
 import { api } from '@/components/gemeinsam/api'
 import { fuellen, mmss } from '@/components/gemeinsam/format'
-import { IconAbmelden, IconBeleg, IconHaus, IconKreuz, IconListe, IconMenue, IconMikro, IconPerson, IconPlus, IconSchild, IconUhr } from '@/components/gemeinsam/Icons'
+import { IconAbmelden, IconBeleg, IconHaus, IconKreuz, IconListe, IconMenue, IconMikro, IconPerson, IconPlus, IconSchild, IconText, IconUhr } from '@/components/gemeinsam/Icons'
 import { useOffeneBestellungen } from '@/components/bestellung/useOffeneBestellungen'
 import { guthabenStufe, usePortal } from './Kontext'
 
@@ -23,6 +23,7 @@ function useNavPunkte(): Punkt[] {
   if (darf(rolle, 'redaktion')) p.push({ href: '/portal/neu', text: t.nav.neu, icon: <IconPlus className="size-5" /> })
   p.push({ href: '/portal/beitraege', text: t.nav.beitraege, icon: <IconListe className="size-5" /> })
   p.push({ href: '/portal/stimmen', text: t.nav.stimmen, icon: <IconMikro className="size-5" /> })
+  if (darf(rolle, 'redaktion')) p.push({ href: '/portal/aussprache', text: t.nav.aussprache, icon: <IconText className="size-5" /> })
   if (darf(rolle, 'redaktion')) p.push({ href: '/portal/guthaben', text: t.nav.guthaben, icon: <IconUhr className="size-5" /> })
   p.push({ href: '/portal/konto', text: t.nav.konto, icon: <IconPerson className="size-5" /> })
   if (nutzer.ist_admin) p.push({ href: '/portal/admin/stimmen', text: t.nav.admin, icon: <IconSchild className="size-5" /> })

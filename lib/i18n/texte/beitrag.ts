@@ -138,6 +138,7 @@ const de = {
     verboten: 'unzulässiger Inhalt',
     von_hand: 'von Hand geändert',
     neu_von_hand: 'von Hand eingefügt',
+    umformuliert: 'ein Wort leichter sprechbar ersetzt',
   },
   editor: {
     hinweis: 'Sie bearbeiten das Drehbuch. Ihre Änderungen gelten erst, wenn Sie auf „Speichern“ klicken.',
@@ -384,6 +385,7 @@ const en: typeof de = {
     verboten: 'content not allowed',
     von_hand: 'changed by hand',
     neu_von_hand: 'added by hand',
+    umformuliert: 'one word swapped to be easier to say',
   },
   editor: {
     hinweis: 'You are editing the script. Your changes only apply once you click “Save”.',
@@ -630,6 +632,7 @@ const es: typeof de = {
     verboten: 'contenido no permitido',
     von_hand: 'cambiada a mano',
     neu_von_hand: 'añadida a mano',
+    umformuliert: 'una palabra cambiada para pronunciarla mejor',
   },
   editor: {
     hinweis: 'Estás editando el guion. Tus cambios solo cuentan cuando pulses «Guardar».',
