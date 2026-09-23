@@ -1,0 +1,201 @@
+{
+  "titel": "Inselfunk — Mieten auf Mallorca",
+  "sprache": "de",
+  "stand": "2026-09-23",
+  "sprecher": {
+    "lena": {
+      "stimme": "marin",
+      "rolle": "Moderatorin, warm, neugierig, lacht leicht und ansteckend, deutsche Radiomoderatorin Mitte dreißig"
+    },
+    "jan": {
+      "stimme": "cedar",
+      "rolle": "Moderator, trocken-humorvoll, faktenfest, ruhig, deutscher Radiomoderator Ende dreißig"
+    }
+  },
+  "quellen": [
+    {
+      "nr": 1,
+      "was": "Balearen 20 €/m², +2,4 % ggü. Vorjahr, zweitteuerste Region nach Madrid (21,5 €); Palma 19,3 €/m², +5,9 %",
+      "wo": "idealista, August 2026, via Forbes España 01.09.2026",
+      "url": "https://forbes.es/baleares/actualidad-baleares/1008735/baleares-se-mantiene-en-agosto-como-la-segunda-autonomia-con-el-alquiler-mas-caro-de-espana/"
+    },
+    {
+      "nr": 2,
+      "was": "Paar findet unter 1.500 € nichts, etwa die Hälfte des Einkommens; Pflegegewerkschaft: 80 Mitglieder in den ersten fünf Monaten 2026 wegen der Mieten weg; 4 von 10 getrennten Paaren wohnen weiter zusammen (Präsidentin Verband der Familienanwälte)",
+      "wo": "Mallorca Magazin, 06.07.2026",
+      "url": "https://www.mallorcamagazin.com/nachrichten/immobilien/2026/07/06/154175/unter-1500-euro-keine-wohnung-bekommen-wie-der-mietmarkt-auf-mallorca-immer-mehr-unter-druck-gerat.html"
+    },
+    {
+      "nr": 3,
+      "was": "1.200 € für ein WG-Zimmer",
+      "wo": "Mallorca Magazin, 23.02.2026",
+      "url": "https://www.mallorcamagazin.com/nachrichten/gesellschaft/2026/02/23/148803/wohnungsnot-auf-mallorca-1200-euro-fur-ein-zimmer-ehepaar-zieht-wohnwagen.html"
+    },
+    {
+      "nr": 4,
+      "was": "Campingbusse im Sóller-Tal als Dauerwohnung von Berufstätigen, z. B. Masseurin eines Hotels in Port de Sóller",
+      "wo": "Mallorca Magazin, 18.08.2026",
+      "url": "https://www.mallorcamagazin.com/nachrichten/lokales/2026/08/18/156047/wohnungsnot-auf-mallorca-immer-schlimmer-campmobile-fluten-orangental.html"
+    },
+    {
+      "nr": 5,
+      "was": "Palma verbietet neue touristische Plätze in Wohnungen im ganzen Stadtgebiet, ohne Ausnahme; „Wohnungen sind zum Wohnen da“",
+      "wo": "Infobae, 03.02.2026",
+      "url": "https://www.infobae.com/espana/2026/02/03/palma-prohibe-crear-nuevas-plazas-de-alquiler-turistico-en-viviendas-los-pisos-son-para-vivir/"
+    }
+  ],
+  "zeilen": [
+    {
+      "wer": "lena",
+      "text": "Guten Morgen, Mallorca! Hier ist Lena …",
+      "regie": "Fröhlich, energiegeladen, Sendungsbeginn, lächelnd gesprochen."
+    },
+    {
+      "wer": "jan",
+      "text": "… und Jan. Und bevor jemand fragt: Ja, wir sind zwei KI-Stimmen. Wir zahlen also keine Miete. Was uns heute ehrlich gesagt ein bisschen verdächtig macht.",
+      "regie": "Trocken, verschmitzt, kleines Schmunzeln am Ende.",
+      "luecke": 120
+    },
+    {
+      "wer": "lena",
+      "text": "Genau darum geht's heute: Mieten auf Mallorca. Jan, du hast die neuen Zahlen?",
+      "regie": "Kurzes, echtes Lachen am Anfang, dann neugierig."
+    },
+    {
+      "wer": "jan",
+      "text": "Hab ich. Laut idealista liegen die Balearen im August bei zwanzig Euro pro Quadratmeter. Damit sind wir die zweitteuerste Region in ganz Spanien. Nur Madrid ist noch teurer.",
+      "regie": "Sachlich, klar, ruhig, wie ein Nachrichtenblock mit Wärme."
+    },
+    {
+      "wer": "lena",
+      "text": "Zwanzig Euro. Pro Quadratmeter.",
+      "regie": "Ungläubig, langsam, leicht fassungslos."
+    },
+    {
+      "wer": "jan",
+      "text": "Pro Monat. Palma liegt bei neunzehn Euro dreißig – fast sechs Prozent mehr als vor einem Jahr.",
+      "regie": "Trocken, nüchtern.",
+      "luecke": 150
+    },
+    {
+      "wer": "lena",
+      "text": "Okay, rechnen wir mal. Eine ganz normale Wohnung, siebzig Quadratmeter …",
+      "regie": "Zügig, rechnend, locker."
+    },
+    {
+      "wer": "jan",
+      "text": "… sind rund dreizehnhundertfünfzig Euro. Und Strom und Wasser kommen noch dazu. Und die Klimaanlage. Die brauchst du im August, glaub mir.",
+      "regie": "Übernimmt den Satz, trocken-humorvoll, leicht seufzend bei der Klimaanlage.",
+      "luecke": 80
+    },
+    {
+      "wer": "lena",
+      "text": "Und Meerblick?",
+      "regie": "Frech, mit einem kleinen Lachen in der Stimme."
+    },
+    {
+      "wer": "jan",
+      "text": "Meerblick gibt's auch. Auf dem Poster im Flur.",
+      "regie": "Ganz trocken, Pointe knapp gesetzt, nicht selbst lachen."
+    },
+    {
+      "wer": "lena",
+      "text": "Wobei – ehrlich gesagt ist das für viele gar nicht mehr lustig. Das Mallorca Magazin berichtete im Juli über ein Paar, das sagt: Unter fünfzehnhundert Euro finden wir nichts. Das ist ungefähr die Hälfte von dem, was die beiden zusammen verdienen.",
+      "regie": "Beginnt mit kurzem herzlichem Lachen über die Pointe, wird dann spürbar ernster, empathisch, ruhiger."
+    },
+    {
+      "wer": "jan",
+      "text": "Die Hälfte. Und für ein einzelnes Zimmer in einer WG werden teilweise zwölfhundert Euro verlangt.",
+      "regie": "Ernst, leise Empörung, ruhig."
+    },
+    {
+      "wer": "lena",
+      "text": "Und dann landet man eben woanders. Im Sóller-Tal, zwischen den Orangenbäumen, stehen immer mehr Campingbusse. Und darin wohnen keine Abenteurer, sondern Leute, die hier arbeiten. Eine Masseurin aus einem Hotel in Port de Sóller zum Beispiel.",
+      "regie": "Erzählend, mitfühlend, ruhig, bildhaft."
+    },
+    {
+      "wer": "jan",
+      "text": "Das ist das Absurde: Die Insel sucht Personal – und das Personal sucht eine Wohnung. Die Pflegegewerkschaft zählt achtzig Mitglieder, die allein in den ersten fünf Monaten dieses Jahres die Insel verlassen haben. Wegen der Miete.",
+      "regie": "Nachdenklich, ernst, mit Nachdruck auf 'Wegen der Miete'."
+    },
+    {
+      "wer": "lena",
+      "text": "Achtzig Pflegekräfte. Das merkt man dann im Krankenhaus.",
+      "regie": "Betroffen und ruhiger, aber deutlich artikuliert. Das erste Wort „Achtzig“ klar und hörbar betonen, nicht verschlucken."
+    },
+    {
+      "wer": "jan",
+      "text": "Und jetzt kommt meine Lieblingszahl. Also – Lieblingszahl in Anführungszeichen.",
+      "regie": "Stimmungswechsel, verschmitzt, kündigt eine Pointe an."
+    },
+    {
+      "wer": "lena",
+      "text": "Oh nein.",
+      "regie": "Lachend, ahnungsvoll.",
+      "luecke": 60
+    },
+    {
+      "wer": "jan",
+      "text": "Doch. Vier von zehn Paaren, die sich trennen, wohnen danach weiter zusammen. Weil sich keiner eine zweite Wohnung leisten kann. Sagt die Präsidentin des spanischen Verbands der Familienanwälte.",
+      "regie": "Trocken, ernsthaft vorgetragen, gerade dadurch komisch."
+    },
+    {
+      "wer": "lena",
+      "text": "Getrennt. Aber mit gemeinsamem Kühlschrank.",
+      "regie": "Kurzes, ungläubiges, herzliches Lachen vorweg, dann der Satz. Lachen höchstens eine Sekunde."
+    },
+    {
+      "wer": "jan",
+      "text": "Mit einem Zettel dran: Mein Joghurt. Dein Joghurt. Unsere Vergangenheit.",
+      "regie": "Trocken, dann bei 'Unsere Vergangenheit' selbst kurz auflachen.",
+      "luecke": 100
+    },
+    {
+      "wer": "lena",
+      "text": "Tut die Politik denn was?",
+      "regie": "Noch leicht lachend, dann ernsthaft fragend."
+    },
+    {
+      "wer": "jan",
+      "text": "Palma hat im Februar beschlossen: keine neuen Ferienplätze mehr in Wohnungen, im ganzen Stadtgebiet, ohne Ausnahme. Die Begründung: Wohnungen sind zum Wohnen da.",
+      "regie": "Sachlich, klar."
+    },
+    {
+      "wer": "lena",
+      "text": "Ein Satz, den man eigentlich nicht beschließen müssen sollte.",
+      "regie": "Leicht ironisch, warm."
+    },
+    {
+      "wer": "jan",
+      "text": "Eigentlich nicht. Neue Wohnungen entstehen dadurch allerdings noch keine. Das wird dauern.",
+      "regie": "Ruhig, realistisch."
+    },
+    {
+      "wer": "lena",
+      "text": "Deshalb unsere Frage an euch: Wie wohnt ihr gerade? In der WG, im Campingbus – oder seid ihr Glückspilze mit einem alten Mietvertrag? Erzählt's uns.",
+      "regie": "Warm, einladend, direkt an die Hörer."
+    },
+    {
+      "wer": "jan",
+      "text": "Und falls ihr eine bezahlbare Wohnung kennt …",
+      "regie": "Verschwörerisch, leise."
+    },
+    {
+      "wer": "lena",
+      "text": "… behaltet sie! Aber erzählt uns, wie ihr das geschafft habt.",
+      "regie": "Fällt ihm ins Wort. „Behaltet sie!“ deutlich und klar artikuliert, erst DANACH kurz auflachen, dann den Rest warm sprechen.",
+      "luecke": 40
+    },
+    {
+      "wer": "jan",
+      "text": "Das war Inselfunk – mit Jan …",
+      "regie": "Abmoderation, warm, entspannt."
+    },
+    {
+      "wer": "lena",
+      "text": "… und Lena. Zwei KI-Stimmen von Klarframe. Bis morgen, Mallorca!",
+      "regie": "Fröhlich, strahlend, Sendungsende.",
+      "luecke": 100
+    }
+  ]
+}

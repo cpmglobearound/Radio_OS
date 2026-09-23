@@ -1,0 +1,263 @@
+[
+ {
+  "zeile": 1,
+  "wer": "lena",
+  "soll": "Guten Morgen, Mallorca! Hier ist Lena …",
+  "gehoert": "Guten Morgen Mallorca, hier ist Lena.",
+  "sek": 2.34,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 2,
+  "wer": "jan",
+  "soll": "… und Jan. Und bevor jemand fragt: Ja, wir sind zwei KI-Stimmen. Wir zahlen also keine Miete. Was uns heute ehrlich gesagt ein bisschen verdächtig macht.",
+  "gehoert": "Ja, und Jan, und bevor jemand fragt: Ja, wir sind zwei KI-Stimmen, wir zahlen also keine Miete. Was uns heute ehrlich gesagt ein bisschen verdächtig macht.",
+  "sek": 11.29,
+  "wortgenauigkeit": 0.9615384615384616,
+  "versuche": 1
+ },
+ {
+  "zeile": 3,
+  "wer": "lena",
+  "soll": "Genau darum geht's heute: Mieten auf Mallorca. Jan, du hast die neuen Zahlen?",
+  "gehoert": "Genau darum geht's heute: Mieten auf Mallorca. Jan, du hast die neuen Zahlen?",
+  "sek": 5.98,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 4,
+  "wer": "jan",
+  "soll": "Hab ich. Laut idealista liegen die Balearen im August bei zwanzig Euro pro Quadratmeter. Damit sind wir die zweitteuerste Region in ganz Spanien. Nur Madrid ist noch teurer.",
+  "gehoert": "Habe ich. Laut Idealista liegen die Balearen im August bei 20 Euro pro Quadratmeter, damit sind wir die zweitteuerste Region in ganz Spanien, nur Madrid ist noch teurer.",
+  "sek": 11.2,
+  "wortgenauigkeit": 0.9285714285714286,
+  "versuche": 1
+ },
+ {
+  "zeile": 5,
+  "wer": "lena",
+  "soll": "Zwanzig Euro. Pro Quadratmeter.",
+  "gehoert": "Zwanzig Euro pro Quadratmeter.",
+  "sek": 2.97,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 6,
+  "wer": "jan",
+  "soll": "Pro Monat. Palma liegt bei neunzehn Euro dreißig – fast sechs Prozent mehr als vor einem Jahr.",
+  "gehoert": "pro Monat. Palma liegt bei neunzehn Euro dreißig, fast sechs Prozent mehr als vor einem Jahr.",
+  "sek": 5.88,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 7,
+  "wer": "lena",
+  "soll": "Okay, rechnen wir mal. Eine ganz normale Wohnung, siebzig Quadratmeter …",
+  "gehoert": "Okay, rechnen wir mal: Eine ganz normale Wohnung, 70 Quadratmeter.",
+  "sek": 4.65,
+  "wortgenauigkeit": 0.9,
+  "versuche": 3
+ },
+ {
+  "zeile": 8,
+  "wer": "jan",
+  "soll": "… sind rund dreizehnhundertfünfzig Euro. Und Strom und Wasser kommen noch dazu. Und die Klimaanlage. Die brauchst du im August, glaub mir.",
+  "gehoert": "sind rund 1350 Euro, und Strom und Wasser kommen noch dazu und die Klimaanlage, die brauchst du im August, glaub mir.",
+  "sek": 9.41,
+  "wortgenauigkeit": 0.9523809523809523,
+  "versuche": 2
+ },
+ {
+  "zeile": 9,
+  "wer": "lena",
+  "soll": "Und Meerblick?",
+  "gehoert": "Und Meerblick?",
+  "sek": 0.86,
+  "wortgenauigkeit": 1,
+  "versuche": 3
+ },
+ {
+  "zeile": 10,
+  "wer": "jan",
+  "soll": "Meerblick gibt's auch. Auf dem Poster im Flur.",
+  "gehoert": "Meerblick gibt’s auch, auf dem Poster im Flur.",
+  "sek": 3.46,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 11,
+  "wer": "lena",
+  "soll": "Wobei – ehrlich gesagt ist das für viele gar nicht mehr lustig. Das Mallorca Magazin berichtete im Juli über ein Paar, das sagt: Unter fünfzehnhundert Euro finden wir nichts. Das ist ungefähr die Hälfte von dem, was die beiden zusammen verdienen.",
+  "gehoert": "Wobei, ehrlich gesagt, ist das für viele gar nicht mehr lustig. Das Mallorca Magazin berichtete im Juli über ein Paar, das sagt: Unter 1500 Euro finden wir nichts. Das ist ungefähr die Hälfte von dem, was die beiden zusammen verdienen.",
+  "sek": 14.58,
+  "wortgenauigkeit": 0.975,
+  "versuche": 1
+ },
+ {
+  "zeile": 12,
+  "wer": "jan",
+  "soll": "Die Hälfte. Und für ein einzelnes Zimmer in einer WG werden teilweise zwölfhundert Euro verlangt.",
+  "gehoert": "Die Hälfte, und für ein einzelnes Zimmer in einer WG werden teilweise 1200 Euro verlangt.",
+  "sek": 5.95,
+  "wortgenauigkeit": 0.9333333333333333,
+  "versuche": 1
+ },
+ {
+  "zeile": 13,
+  "wer": "lena",
+  "soll": "Und dann landet man eben woanders. Im Sóller-Tal, zwischen den Orangenbäumen, stehen immer mehr Campingbusse. Und darin wohnen keine Abenteurer, sondern Leute, die hier arbeiten. Eine Masseurin aus einem Hotel in Port de Sóller zum Beispiel.",
+  "gehoert": "Und dann landet man eben woanders: Im Soller-Tal zwischen den Orangenbäumen stehen immer mehr Campingbusse. Und darin wohnen keine Abenteurer, sondern Leute, die hier arbeiten, eine Masseurin aus einem Hotel in Port de Soller zum Beispiel.",
+  "sek": 14.55,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 14,
+  "wer": "jan",
+  "soll": "Das ist das Absurde: Die Insel sucht Personal – und das Personal sucht eine Wohnung. Die Pflegegewerkschaft zählt achtzig Mitglieder, die allein in den ersten fünf Monaten dieses Jahres die Insel verlassen haben. Wegen der Miete.",
+  "gehoert": "Das ist das Absurde: Die Insel sucht Personal und das Personal sucht eine Wohnung. Die Pflegegewerkschaft zählt 80 Mitglieder, die allein in den ersten fünf Monaten dieses Jahres die Insel verlassen haben. Wegen der Miete.",
+  "sek": 11.5,
+  "wortgenauigkeit": 0.9714285714285714,
+  "versuche": 1
+ },
+ {
+  "zeile": 15,
+  "wer": "lena",
+  "soll": "Achtzig Pflegekräfte. Das merkt man dann im Krankenhaus.",
+  "gehoert": "Achtzig Pflegekräfte. Das merkt man dann im Krankenhaus.",
+  "sek": 4.71,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 16,
+  "wer": "jan",
+  "soll": "Und jetzt kommt meine Lieblingszahl. Also – Lieblingszahl in Anführungszeichen.",
+  "gehoert": "Und jetzt kommt meine Lieblingszahl, also Lieblingszahl in Anführungszeichen.",
+  "sek": 4.59,
+  "wortgenauigkeit": 1,
+  "versuche": 2
+ },
+ {
+  "zeile": 17,
+  "wer": "lena",
+  "soll": "Oh nein.",
+  "gehoert": "Oh nein.",
+  "sek": 2.18,
+  "wortgenauigkeit": 1,
+  "versuche": 3
+ },
+ {
+  "zeile": 18,
+  "wer": "jan",
+  "soll": "Doch. Vier von zehn Paaren, die sich trennen, wohnen danach weiter zusammen. Weil sich keiner eine zweite Wohnung leisten kann. Sagt die Präsidentin des spanischen Verbands der Familienanwälte.",
+  "gehoert": "Doch: Vier von zehn Paaren, die sich trennen, wohnen danach weiter zusammen, weil sich keiner eine zweite Wohnung leisten kann, sagt die Präsidentin des spanischen Verbands der Familienanwälte.",
+  "sek": 12.15,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 19,
+  "wer": "lena",
+  "soll": "Getrennt. Aber mit gemeinsamem Kühlschrank.",
+  "gehoert": "Getrennt, aber mit gemeinsamem Kühlschrank.",
+  "sek": 3.9,
+  "wortgenauigkeit": 1,
+  "versuche": 2
+ },
+ {
+  "zeile": 20,
+  "wer": "jan",
+  "soll": "Mit einem Zettel dran: Mein Joghurt. Dein Joghurt. Unsere Vergangenheit.",
+  "gehoert": "Mit einem Zettel dran: Mein Joghurt, dein Joghurt, unsere Vergangenheit.",
+  "sek": 5.18,
+  "wortgenauigkeit": 1,
+  "versuche": 2
+ },
+ {
+  "zeile": 21,
+  "wer": "lena",
+  "soll": "Tut die Politik denn was?",
+  "gehoert": "Tut die Politik denn was?",
+  "sek": 1.44,
+  "wortgenauigkeit": 1,
+  "versuche": 2
+ },
+ {
+  "zeile": 22,
+  "wer": "jan",
+  "soll": "Palma hat im Februar beschlossen: keine neuen Ferienplätze mehr in Wohnungen, im ganzen Stadtgebiet, ohne Ausnahme. Die Begründung: Wohnungen sind zum Wohnen da.",
+  "gehoert": "Palma hat im Februar beschlossen: keine neuen Ferienplätze mehr in Wohnungen - im ganzen Stadtgebiet, ohne Ausnahme. Die Begründung: Wohnungen sind zum Wohnen da.",
+  "sek": 10.48,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 23,
+  "wer": "lena",
+  "soll": "Ein Satz, den man eigentlich nicht beschließen müssen sollte.",
+  "gehoert": "Ein Satz, den man eigentlich nicht beschließen müssen sollte.",
+  "sek": 2.9,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 24,
+  "wer": "jan",
+  "soll": "Eigentlich nicht. Neue Wohnungen entstehen dadurch allerdings noch keine. Das wird dauern.",
+  "gehoert": "Eigentlich nicht. Neue Wohnungen entstehen dadurch allerdings noch keine. Das wird dauern.",
+  "sek": 5.09,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 25,
+  "wer": "lena",
+  "soll": "Deshalb unsere Frage an euch: Wie wohnt ihr gerade? In der WG, im Campingbus – oder seid ihr Glückspilze mit einem alten Mietvertrag? Erzählt's uns.",
+  "gehoert": "Deshalb unsere Frage an euch: Wie wohnt ihr gerade? In einer WG, im Campingbus oder seid ihr Glückspilz mit einem alten Mietvertrag? Erzählt's uns!",
+  "sek": 9.86,
+  "wortgenauigkeit": 0.92,
+  "versuche": 1
+ },
+ {
+  "zeile": 26,
+  "wer": "jan",
+  "soll": "Und falls ihr eine bezahlbare Wohnung kennt …",
+  "gehoert": "Und falls ihr eine bezahlbare Wohnung kennt,",
+  "sek": 3.56,
+  "wortgenauigkeit": 1,
+  "versuche": 4
+ },
+ {
+  "zeile": 27,
+  "wer": "lena",
+  "soll": "… behaltet sie! Aber erzählt uns, wie ihr das geschafft habt.",
+  "gehoert": "Behaltet sie, aber erzählt uns, wie ihr das geschafft habt.",
+  "sek": 4.96,
+  "wortgenauigkeit": 1,
+  "versuche": 2
+ },
+ {
+  "zeile": 28,
+  "wer": "jan",
+  "soll": "Das war Inselfunk – mit Jan …",
+  "gehoert": "Das war Inselfunk mit Jan.",
+  "sek": 1.93,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ },
+ {
+  "zeile": 29,
+  "wer": "lena",
+  "soll": "… und Lena. Zwei KI-Stimmen von Klarframe. Bis morgen, Mallorca!",
+  "gehoert": "Und Lena: Zwei KI-Stimmen von Klarframe. Bis morgen, Mallorca!",
+  "sek": 4.57,
+  "wortgenauigkeit": 1,
+  "versuche": 1
+ }
+]
