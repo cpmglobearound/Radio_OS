@@ -2,7 +2,7 @@
 // Aufruf: npx tsx scripts/produktion-pruefen.ts '<json-auftrag>' [--warten]
 // Der Arbeiter muss laufen. Ergebnis: Status, Länge, Lautheit, Wortgenauigkeit je Zeile, Kosten, Abrechnung.
 import { prisma } from '@/lib/db'
-import { beitragErzeugen, AuftragSchema } from '@/lib/beitrag/erstellen'
+import { beitragErzeugen, AuftragSchemaIntern } from '@/lib/beitrag/erstellen'
 import { guthaben } from '@/lib/abrechnung/kontobuch'
 import type { Sitzung } from '@/lib/konto/sitzung'
 
@@ -22,9 +22,9 @@ export async function pruefSitzung(): Promise<Sitzung> {
 }
 
 async function main() {
-  const auftrag = AuftragSchema.parse(JSON.parse(process.argv[2]))
+  const auftrag = AuftragSchemaIntern.parse(JSON.parse(process.argv[2]))
   const s = await pruefSitzung()
-  const b = await beitragErzeugen(auftrag, s)
+  const b = await beitragErzeugen(auftrag, s, { intern: true })
   console.log('Beitrag', b.id)
   if (!process.argv.includes('--warten')) return
   const t0 = Date.now()

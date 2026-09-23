@@ -7,6 +7,7 @@ const HILFE: Record<string, string> = {
   es: 'Programa de radio. Escribe los números con letras. Anota risas, suspiros y respiraciones entre paréntesis: (ríe), (suspira), (respira). Nombres: ',
   en: 'Radio show. Write numbers as words. Note laughter, sighs and breaths in brackets: (laughs), (sighs), (breathes). Names: ',
   ca: 'Programa de ràdio. Escriu els números amb lletres. Anota rialles i sospirs entre parèntesis. Noms: ',
+  sv: 'Radioprogram. Skriv siffror med bokstäver. Notera skratt, suckar och andetag inom parentes: (skrattar), (suckar), (andas). Namn: ',
 }
 
 export async function hoeren(datei: string, sprache: string, namen: string[]) {
@@ -33,16 +34,19 @@ const STOPP: Record<string, string[]> = {
   es: ['y', 'el', 'la', 'los', 'las', 'que', 'es', 'de', 'en', 'un', 'una', 'no', 'por', 'con', 'se'],
   en: ['and', 'the', 'is', 'are', 'to', 'of', 'in', 'it', 'we', 'you', 'not', 'that', 'this', 'with', 'a'],
   ca: ['i', 'el', 'la', 'els', 'les', 'que', 'és', 'de', 'en', 'un', 'una', 'no', 'per', 'amb', 'es'],
+  sv: ['och', 'att', 'det', 'som', 'en', 'på', 'är', 'av', 'för', 'med', 'till', 'den', 'har', 'inte', 'vi', 'jag', 'om'],
 }
-export function spracheErkannt(text: string): string | null {
+/** Gehörte Sprache grob bestimmen (Stoppwörter). Kurze Wörter teilen sich Sprachen („en", „de") — die Zielsprache gewinnt bei (fast) Gleichstand. */
+export function spracheErkannt(text: string, ziel?: string): string | null {
   const w = woerter(text)
   if (w.length < 6) return null
+  const zaehle = (liste: string[]) => w.filter(x => liste.includes(x)).length
   let best: string | null = null, max = 0
-  for (const [s, liste] of Object.entries(STOPP)) { const n = w.filter(x => liste.includes(x)).length; if (n > max) { max = n; best = s } }
+  for (const [s, liste] of Object.entries(STOPP)) { const n = zaehle(liste); if (n > max) { max = n; best = s } }
+  if (ziel && STOPP[ziel] && zaehle(STOPP[ziel]) >= max - 1 && zaehle(STOPP[ziel]) >= 2) return ziel
   return max >= 2 ? best : null
 }
 
-/** Wörter normalisieren. Buchstabierte Abkürzungen („E M T", zwei oder mehr Einzelbuchstaben in Folge) werden zu einem Wort — so schreibt sie auch die Erkennung. */
 export function woerter(t: string) {
   const roh = t.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\p{N}ß ]+/gu, ' ').split(/\s+/).filter(Boolean)
   const aus: string[] = []

@@ -37,9 +37,11 @@ export const AuftragSchema = z.object({
   kennung_position: z.enum(['anfang', 'ende']).default('anfang'),
 })
 export type Auftrag = z.infer<typeof AuftragSchema>
+/** Nur für interne Prüf-/Beispiel-Produktionen (scripts/): auch noch nicht freigegebene Ausgabesprachen. */
+export const AuftragSchemaIntern = AuftragSchema.extend({ sprache: z.enum(AUSGABESPRACHEN.map(s => s.code) as [string, ...string[]]) })
 
 /** Prüft einen Auftrag vollständig und liefert die eingefrorenen Einstellungen + Preis. Wirft verständliche Fehlercodes. */
-export async function auftragPruefen(a: Auftrag, s: Sitzung) {
+export async function auftragPruefen(a: Auftrag, s: Sitzung, opt: { intern?: boolean } = {}) {
   const f = formatVon(a.format)!
   const n = a.sprecher.length
   if (n < f.sprecher_min || n > f.sprecher_max) throw new ApiFehler(400, 'sprecherzahl', `sprecherzahl:${f.sprecher_min}-${f.sprecher_max}`)
@@ -47,7 +49,8 @@ export async function auftragPruefen(a: Auftrag, s: Sitzung) {
     if (a.quelle === 'text' && (t.text ?? '').trim().length < 80) throw new ApiFehler(400, 'text_zu_kurz', 'text_zu_kurz')
     if (a.quelle === 'webseiten' && !(t.urls ?? []).length) throw new ApiFehler(400, 'urls_fehlen', 'urls_fehlen')
   }
-  const erlaubt = await anbietbareStimmen(a.sprache)
+  // Intern (Prüf-Mandant): jede sichtbare Stimme, auch ohne Freigabe für diese Sprache. Kunden: nur freigegebene (Regel 7).
+  const erlaubt = await anbietbareStimmen(opt.intern ? undefined : a.sprache)
   const stimmen = a.sprecher.map(x => erlaubt.find(v => v.id === x.stimme))
   if (stimmen.some(v => !v)) throw new ApiFehler(400, 'stimme_nicht_frei', 'stimme_nicht_frei')
   if (new Set(a.sprecher.map(x => x.stimme)).size < n && n > 1) throw new ApiFehler(400, 'stimmen_gleich', 'stimmen_gleich')
@@ -74,10 +77,10 @@ export async function auftragPruefen(a: Auftrag, s: Sitzung) {
   return { einstellungen, faktor, preis, guthaben: g, guthaben_danach: g - preis.reservierte_sekunden, reicht: g >= preis.reservierte_sekunden, sprache_info: ausgabespracheVon(a.sprache) }
 }
 
-export async function beitragErzeugen(a: Auftrag, s: Sitzung) {
+export async function beitragErzeugen(a: Auftrag, s: Sitzung, opt: { intern?: boolean } = {}) {
   if (!s.nutzer.bestaetigt) throw new ApiFehler(403, 'email_unbestaetigt', 'email_unbestaetigt')
   if (s.mandant!.gesperrt_grund) throw new ApiFehler(403, 'gesperrt', 'gesperrt')
-  const p = await auftragPruefen(a, s)
+  const p = await auftragPruefen(a, s, opt)
   if (!p.reicht) throw new ApiFehler(402, 'guthaben', 'guthaben')
   const titel = a.themen.map(t => t.titel).join(' · ').slice(0, 200)
   const b = await prisma.beitrag.create({ data: {

@@ -32,7 +32,7 @@ async function eine(stimmeId: string, sprache: string) {
       const treue = wortgenauigkeit(t.satz, h.ohne_geraeusche)
       if (treue > bestes.treue) {
         await ff(['-loglevel', 'error', '-i', path.join(tmp, 'z.wav'), '-af', 'loudnorm=I=-16:TP=-1.5', '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '128k', path.join(tmp, 'p.mp3')])
-        bestes = { treue, sprache: spracheErkannt(h.ohne_geraeusche), mp3: await fs.readFile(path.join(tmp, 'p.mp3')), gehoert: h.text }
+        bestes = { treue, sprache: spracheErkannt(h.ohne_geraeusche, sprache.slice(0, 2)), mp3: await fs.readFile(path.join(tmp, 'p.mp3')), gehoert: h.text }
       }
     }
     const key = await speichern(`stimmen/${s.id.replace(':', '_')}/${sprache}.mp3`, bestes.mp3)

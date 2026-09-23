@@ -10,6 +10,7 @@ const NAMEN: Record<Ausgabesprache['basis'], { w: string[]; m: string[] }> = {
   ca: { w: ['Laia', 'Núria', 'Marta', 'Aina', 'Júlia'], m: ['Jordi', 'Pau', 'Marc', 'Arnau', 'Pol'] },
   fr: { w: ['Camille', 'Léa', 'Chloé', 'Manon', 'Julie'], m: ['Lucas', 'Hugo', 'Louis', 'Thomas', 'Paul'] },
   it: { w: ['Giulia', 'Sofia', 'Chiara', 'Martina', 'Sara'], m: ['Luca', 'Marco', 'Matteo', 'Andrea', 'Davide'] },
+  sv: { w: ['Lena', 'Elsa', 'Maja', 'Astrid', 'Ebba'], m: ['Tobbe', 'Jan', 'Erik', 'Oskar', 'Linus'] },
 }
 
 /** Vorschläge passend zum Geschlecht der Stimme (sonst gemischt), ohne schon vergebene Namen. */

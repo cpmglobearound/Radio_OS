@@ -4,7 +4,7 @@ export type UiSprache = (typeof OBERFLAECHE)[number]
 
 export interface Ausgabesprache {
   code: string
-  basis: 'de' | 'es' | 'en' | 'ca' | 'fr' | 'it'
+  basis: 'de' | 'es' | 'en' | 'ca' | 'fr' | 'it' | 'sv'
   land: string
   aktiv: boolean
   wpm: { langsam: number; normal: number; zuegig: number }   // 06 §5 — gesprochene Wörter je Minute
@@ -18,6 +18,8 @@ export const AUSGABESPRACHEN: Ausgabesprache[] = [
   { code: 'en-GB', basis: 'en', land: 'GB', aktiv: true, wpm: { langsam: 135, normal: 155, zuegig: 175 }, anrede: ['you'], anrede_standard: 'you' },
   { code: 'de-AT', basis: 'de', land: 'AT', aktiv: false, wpm: { langsam: 120, normal: 140, zuegig: 160 }, anrede: ['du', 'ihr', 'Sie'], anrede_standard: 'ihr' },
   { code: 'de-CH', basis: 'de', land: 'CH', aktiv: false, wpm: { langsam: 115, normal: 135, zuegig: 155 }, anrede: ['du', 'ihr', 'Sie'], anrede_standard: 'ihr' },
+  // sv-SE: intern eingerichtet (23.09.2026) — für Kunden erst nach menschlicher Stimmfreigabe auf Schwedisch aktivieren.
+  { code: 'sv-SE', basis: 'sv', land: 'SE', aktiv: false, wpm: { langsam: 125, normal: 145, zuegig: 165 }, anrede: ['du', 'ni'], anrede_standard: 'ni' },
   { code: 'ca-ES', basis: 'ca', land: 'ES', aktiv: false, wpm: { langsam: 140, normal: 160, zuegig: 180 }, anrede: ['tu', 'vosaltres', 'vostè'], anrede_standard: 'vosaltres' },
 ]
 

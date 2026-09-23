@@ -41,7 +41,7 @@ export async function zeileSprechen(a: Omit<SprechAuftrag, 'versuch' | 'stimme'>
         for (const zahl of z.zahlen) if (!soll.includes(' ' + woerter(zahl).join(' ') + ' ')) zahlFehler.push(zahl)
       }
       const fehlt = fehlendePflichtwoerter(a.text, h.ohne_geraeusche, a.pflichtwoerter)
-      const sprache = spracheErkannt(h.ohne_geraeusche)
+      const sprache = spracheErkannt(h.ohne_geraeusche, ziel)
       const luecke = sek > 3 ? await laengsteStille(fertig, '-45dB', 1.2) : 0
       const gruende: string[] = []
       if (treue < a.mindest_treue) gruende.push(`Wortgenauigkeit ${Math.round(treue * 100)} %`)

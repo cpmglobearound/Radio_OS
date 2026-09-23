@@ -64,7 +64,7 @@ export async function openaiSuche(anfrage: string, anzahl: number): Promise<KiEr
 
 // Keine Nachrichtenquellen: soziale Netzwerke, Video, Anzeigen- und Buchungsportale.
 const KEINE_NACHRICHTEN = /(^|\.)(facebook|instagram|threads|x|twitter|tiktok|youtube|linkedin|pinterest|reddit|idealista|fotocasa|spotahome|airbnb|booking|tripadvisor|expedia|milanuncios|wallapop)\.[a-z.]+$/i
-const NACHRICHTEN_WORT: Record<string, string> = { de: 'Nachrichten', es: 'noticias', en: 'news', ca: 'notícies', fr: 'actualités', it: 'notizie' }
+const NACHRICHTEN_WORT: Record<string, string> = { de: 'Nachrichten', es: 'noticias', en: 'news', ca: 'notícies', fr: 'actualités', it: 'notizie', sv: 'nyheter' }
 
 /**
  * Zweite Suchquelle: Kimi „Web Search Pro" (POST /v1/tools/search_pro, 0,003 $ je Treffer-Suche; Nachfolger des
